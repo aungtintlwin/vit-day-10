@@ -19,7 +19,7 @@
             target="_blank"
             href="https://goo.gl/forms/xxP3P5DCCDKOtcWf1" 
             class="btn btn-primary btn-lg">
-            Attendance
+            Attendance  
           </a>
         </div>
       </div>
@@ -148,7 +148,35 @@
         </li>
       </ul>
     </div>
+    <div class="col-xs-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            Music List
+          </h3>
+        </div>
+        <ul class="list-group" id="appendMusic">
+
+        </ul>
+      </div>
+    </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
   <script src="./app.js"></script>
+  <script>
+    axios.get('https://that-song-back-end.herokuapp.com/songs')
+    .then(results => {
+      const list = document.getElementById('appendMusic');
+      results.data.map(song => {
+        let listItem = document.createElement('li');
+        listItem.classList.add('list-group-item');
+        listItem.innerHTML = song.title
+        list.appendChild(listItem);
+      });
+    })
+    .catch(err => {
+      console.error(err.message);
+    })
+  </script>
 </body>
 </html>
